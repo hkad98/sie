@@ -1,0 +1,31 @@
+conformance/anthropic_messages/request_vectors.json
+  s_ac2e90cbe65312::t_d230b574c56b73 454-456
+packages/sie_gateway/src/handlers/messages/request.rs
+  s_ac2e90cbe65312::t_f77cf8d3d673c4 576-579
+packages/sie_server/src/sie_server/api/anthropic_translation.py
+  s_ac2e90cbe65312::t_ea2957d0259e14 592
+packages/sie_server/src/sie_server/api/generate.py
+  s_ac2e90cbe65312::t_e7add552a16489 575-577,587,591-592
+packages/sie_server/src/sie_server/processors/tool_call_parser.py
+  s_ac2e90cbe65312::t_cd3c36a824e566 200,204-206,212-215,219,255,262-265,268-270
+packages/sie_server/tests/api/test_anthropic_translation.py
+  s_ac2e90cbe65312::t_3425fb49c22590 12,108-116
+packages/sie_server/tests/processors/test_tool_call_parser.py
+  s_ac2e90cbe65312::t_97cc0df1f046a7 1005-1020
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a8c8742653609b416676e4304612185a8b99e23c",
+  "prompts": {},
+  "sessions": {
+    "s_ac2e90cbe65312": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1c65281b-fd94-4bd7-8440-3162022b2da2",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jan Kadlec <jan.kadlec@gooddata.com>"
+    }
+  }
+}
