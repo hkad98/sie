@@ -1,0 +1,31 @@
+conformance/anthropic_messages/request_vectors.json
+  s_ac2e90cbe65312::t_010e448a4b93bb 457
+packages/sie_server/src/sie_server/api/generate.py
+  s_828c3ba251f9b7::t_d7126134ba0d5e 396-402
+packages/sie_server/tests/api/test_generate.py
+  s_ac2e90cbe65312::t_b5dd856c0ebba6 1072-1073
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ec679c2e550fdfe67a4bdd489575f797503f7269",
+  "prompts": {},
+  "sessions": {
+    "s_828c3ba251f9b7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "de251889-7257-4508-bdde-738fa0229e0a",
+        "model": "unknown"
+      },
+      "human_author": "Jan Kadlec <jan.kadlec@gooddata.com>"
+    },
+    "s_ac2e90cbe65312": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1c65281b-fd94-4bd7-8440-3162022b2da2",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jan Kadlec <jan.kadlec@gooddata.com>"
+    }
+  }
+}
