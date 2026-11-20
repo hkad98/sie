@@ -1,0 +1,39 @@
+conformance/anthropic_messages/request_vectors.json
+  s_ac2e90cbe65312::t_9ea2a31ee18086 454-456
+packages/sie_gateway/src/handlers/grammar.rs
+  s_ac2e90cbe65312::t_63050bc7fe0b4e 27-30,92-96,165-187,265,278-279,361-425,455,458,465,476-484,491,612-615,617-625,635-636,639,646,653,671-675,678-680,697,717,756,925,927,938,940,1406-1547
+packages/sie_gateway/src/handlers/messages/request.rs
+  s_ac2e90cbe65312::t_0f75ebb1fd1b12 13,574-576
+packages/sie_gateway/src/handlers/messages/tests.rs
+  s_ac2e90cbe65312::t_ed2526f5d538ca 208-221
+packages/sie_gateway/src/handlers/proxy.rs
+  s_ac2e90cbe65312::t_5905254fd1811b 6511,6760-6762,8052-8056,8159-8165,27039-27040,27056-27080,27509
+packages/sie_gateway/src/handlers/test_support.rs
+  s_ac2e90cbe65312::t_88682cb38506cc 1255-1287
+packages/sie_server/src/sie_server/api/anthropic_translation.py
+  s_ac2e90cbe65312::t_98a4f774333d1c 28,590-592
+packages/sie_server/src/sie_server/api/generate.py
+  s_ac2e90cbe65312::t_638572c97d4f59 172-173,179-186,409-432,454-456,458,496-500,539-548,564-590
+packages/sie_server/src/sie_server/processors/tool_call_parser.py
+  s_ac2e90cbe65312::t_2aeef06b129051 199-208,212-220,229,243,254-258,262-268,276
+packages/sie_server/tests/api/test_anthropic_translation.py
+  s_ac2e90cbe65312::t_3e89e7a98ce946 95-112
+packages/sie_server/tests/processors/test_tool_call_parser.py
+  s_ac2e90cbe65312::t_df4499a37fa6a4 994-1004
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8b202a8d40e0895e807a7e947de16f2064ad3f70",
+  "prompts": {},
+  "sessions": {
+    "s_ac2e90cbe65312": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1c65281b-fd94-4bd7-8440-3162022b2da2",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jan Kadlec <jan.kadlec@gooddata.com>"
+    }
+  }
+}
