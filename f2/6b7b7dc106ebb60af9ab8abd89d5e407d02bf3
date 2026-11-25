@@ -1,0 +1,29 @@
+packages/sie_server/tests/config/test_qwen38_generation_profiles.py
+  s_e3c1a3a198eb8d::t_9524139867874a 58-59,281-309
+packages/sie_server/models/Qwen__Qwen3.8-27B-FP8.yaml
+  s_9e676c6458ea96::t_1a629c1d39afd3 284-345
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f26b7b7dc106ebb60af9ab8abd89d5e407d02bf3",
+  "prompts": {},
+  "sessions": {
+    "s_9e676c6458ea96": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "23952705-48e6-4f9c-aaf7-41962c5002b0",
+        "model": "unknown"
+      },
+      "human_author": "Jan Kadlec <jan.kadlec@gooddata.com>"
+    },
+    "s_e3c1a3a198eb8d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4af40693-64be-4494-9789-2174896a4aa0",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jan Kadlec <jan.kadlec@gooddata.com>"
+    }
+  }
+}
