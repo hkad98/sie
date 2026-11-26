@@ -1,0 +1,39 @@
+COMPATIBILITY.md
+  s_73787f2a14c938::t_ce41c9675f5d46 100-103
+conformance/openai_responses/README.md
+  s_73787f2a14c938::t_e003ee5fc2fdd8 130-134
+conformance/openai_responses/error_vectors.json
+  s_73787f2a14c938::t_62df567b3ba703 255-277
+conformance/openai_responses/request_vectors.json
+  s_73787f2a14c938::t_3a7af198ef8eca 803,830-831,841-885,1755,1759,1764,1766
+packages/sie_gateway/src/handlers/responses/request.rs
+  s_73787f2a14c938::t_7213debc783a9d 460-464,483-488
+packages/sie_gateway/src/handlers/responses/tests.rs
+  s_73787f2a14c938::t_c6b2b14eeba8bb 955-1047
+packages/sie_sdk/src/sie_sdk/types.py
+  s_73787f2a14c938::t_7cff965e939cf9 1099-1100,1107
+packages/sie_server/src/sie_server/api/responses_translation.py
+  s_73787f2a14c938::t_5039e590bab283 386,393-397
+packages/sie_server/tests/api/test_openai_local.py
+  s_73787f2a14c938::t_7b2dfc599836db 2202-2225
+packages/sie_ts_sdk/src/types.ts
+  s_73787f2a14c938::t_a02afe2ed70a88 1744-1746,1754
+packages/sie_server/tests/api/test_responses_translation.py
+  s_73787f2a14c938::t_7e5fdbc2a8691e 227-238
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "452122dca5fc8e2fa2da03cdeeccc549843192a1",
+  "prompts": {},
+  "sessions": {
+    "s_73787f2a14c938": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a72b2853-c25b-4de7-a64b-05117a97e80e",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jan Kadlec <jan.kadlec@gooddata.com>"
+    }
+  }
+}
