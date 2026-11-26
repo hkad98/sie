@@ -224,6 +224,18 @@ def test_an_error_vector_keeps_the_answer_and_renames_the_param(case: dict[str, 
     assert json.loads(content) == expect["body"]
 
 
+@pytest.mark.parametrize("strict", [True, False, None])
+def test_a_function_tool_keeps_its_strict_on_the_chat_tool(strict: bool | None) -> None:
+    tool = {"type": "function", "name": "final_answer", "parameters": {"type": "object"}, "strict": strict}
+
+    [chat_tool] = responses_to_chat({"model": "m", "input": "x", "tools": [tool]}).chat["tools"]
+
+    if strict is None:
+        assert "strict" not in chat_tool["function"]
+    else:
+        assert chat_tool["function"]["strict"] is strict
+
+
 def test_a_body_that_is_not_an_openai_error_passes_unchanged() -> None:
     for body in (b"", b"not json", b'{"detail": {"code": "X", "param": "max_completion_tokens"}}', b"[]"):
         assert responses_error([("retry-after", "3")], body) == ([("retry-after", "3")], body)

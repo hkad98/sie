@@ -97,6 +97,10 @@ or undeclared keys.
   `/v1/chat/completions` routes of a standalone server, because those routes
   return the engine's own tool calls without validating them. Remote-backed
   models pass `strict` to their upstream unchanged.
+- **`/v1/responses`.** A function tool's `strict` now passes through to the
+  chat tool, so `/v1/responses` enforces it exactly as above. Earlier releases
+  refused `strict: true` with `400 unsupported_field`. A chat refusal of a
+  strict tool names the field the caller sent, `tools[i].strict`.
 
 This document defines SIE's compatibility commitments: what constitutes a breaking change, how deprecations are communicated, and what must be true before declaring 1.0.
 

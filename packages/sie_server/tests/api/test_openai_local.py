@@ -2199,6 +2199,30 @@ def test_cuda_chat_refuses_strict_tools_before_the_child(monkeypatch: pytest.Mon
     assert error["param"] == "tools[0].function.strict"
 
 
+@pytest.mark.parametrize("stream", [False, True])
+def test_responses_strict_tool_refusal_names_the_responses_field(monkeypatch: pytest.MonkeyPatch, stream: bool) -> None:
+    """A strict tool the direct route cannot enforce is refused at the field the Responses caller sent."""
+
+    def _handler(_request: httpx.Request) -> httpx.Response:
+        raise AssertionError("a strict tool must not reach the child")
+
+    client, _registry = _cuda_chat_client(monkeypatch, _handler)
+    client.app.include_router(openai_responses.router)
+    strict_tool = {"type": "function", **_WEATHER_TOOL["function"], "strict": True}
+    response = client.post(
+        "/v1/responses",
+        json={"model": "upstream/repo", "input": "hi", "tools": [strict_tool], "stream": stream},
+    )
+
+    assert response.status_code == 400, response.text
+    assert response.json()["error"] == {
+        "message": "strict function tools are not enforced on this route for this model",
+        "type": "invalid_request_error",
+        "param": "tools[0].strict",
+        "code": "unsupported_field",
+    }
+
+
 def test_cuda_chat_strict_schema_with_unevaluated_properties_is_rejected(monkeypatch: pytest.MonkeyPatch) -> None:
     def _handler(_request: httpx.Request) -> httpx.Response:
         raise AssertionError("an unverifiable strict schema must not reach the child")

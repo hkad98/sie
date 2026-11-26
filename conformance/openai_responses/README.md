@@ -127,9 +127,11 @@ and no `type` is a message. The accepted item types are `message`,
 ### Tools and tool_choice
 
 - `{"type":"function","name","description"?,"parameters"?,"strict"?}` becomes
-  `{"type":"function","function":{"name","description"?,"parameters"?}}`.
-  `strict: false` is accepted and dropped; `strict: true` is refused at
-  `tools[i].strict`: `strict function schemas are not supported`.
+  `{"type":"function","function":{"name","description"?,"parameters"?,"strict"?}}`.
+  `strict` passes through unchanged, and the chat route enforces
+  `strict: true` (see `COMPATIBILITY.md`). A chat refusal of a strict tool
+  keeps the Responses field, for example `tools[i].strict`. A `strict` that is
+  not a boolean is refused at `tools[i].strict`: `Input should be a valid boolean`.
 - `{"type":"custom","name","description"?,"format"?}` becomes a function whose
   parameters are one required string `input`. `format` is accepted and not
   enforced. A call to a custom tool comes back as a `custom_tool_call` item.

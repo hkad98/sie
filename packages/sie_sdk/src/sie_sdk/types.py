@@ -1096,15 +1096,15 @@ ResponseInputItem = (
 class ResponseFunctionTool(TypedDict):
     """A function tool the model may call.
 
-    ``strict`` may be omitted or ``False``; strict function schemas are
-    rejected.
+    With ``strict: True`` the server enforces ``parameters`` on every call to
+    this tool, as ``/v1/chat/completions`` does.
     """
 
     type: Literal["function"]
     name: str
     description: NotRequired[str]
     parameters: NotRequired[dict[str, Any]]
-    strict: NotRequired[Literal[False]]
+    strict: NotRequired[bool]
 
 
 class ResponseCustomTool(TypedDict):

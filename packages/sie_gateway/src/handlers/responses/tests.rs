@@ -952,6 +952,99 @@ async fn chat_refusals_name_the_responses_field() {
     assert!(gateway.dispatcher.dispatched().is_empty());
 }
 
+const GRAMMAR_CODER_MODEL: &str = "\
+sie_id: acme/grammar-coder
+hf_id: acme/grammar-coder
+tasks:
+  generate:
+    max_output_tokens: 64
+    grammar_profile: no-spec
+    capabilities:
+      tools: true
+profiles:
+  default:
+    adapter_path: sie_server.adapters.sglang:SGLangAdapter
+    max_batch_tokens: 8192
+    adapter_options:
+      loadtime:
+        speculative:
+          algorithm: NEXTN
+          num_steps: 3
+  no-spec:
+    extends: default
+    adapter_options:
+      loadtime:
+        speculative:
+          enabled: false
+";
+
+fn strict_tool(strict: bool) -> Value {
+    json!({
+        "type": "function",
+        "name": "final_answer",
+        "parameters": {
+            "type": "object",
+            "properties": {"answer": {"type": "string"}},
+            "required": ["answer"],
+            "additionalProperties": false,
+        },
+        "strict": strict,
+    })
+}
+
+#[test]
+fn a_strict_tool_reaches_the_chat_seam_with_strict() {
+    for strict in [true, false] {
+        let (_, params) = responses_dispatch_inputs(&json!({
+            "model": "acme/grammar-coder",
+            "input": "hi",
+            "tools": [strict_tool(strict)],
+        }))
+        .unwrap();
+        let tools = params
+            .generate
+            .unwrap()
+            .tools
+            .expect("the chat seam keeps the tools");
+        assert_eq!(tools[0]["function"]["strict"], json!(strict));
+    }
+}
+
+#[tokio::test]
+async fn a_strict_tool_is_served_on_the_grammar_profile() {
+    let gateway = chat_gateway(
+        &[GRAMMAR_CODER_MODEL],
+        &["acme/grammar-coder", "acme/grammar-coder:no-spec"],
+    )
+    .await;
+    for (strict, dispatched_model) in [
+        (true, "acme/grammar-coder:no-spec"),
+        (false, "acme/grammar-coder"),
+    ] {
+        let response = proxy_responses(
+            State(Arc::clone(&gateway.state)),
+            responses_request(json!({
+                "model": "acme/grammar-coder",
+                "input": "hi",
+                "max_output_tokens": 32,
+                "tools": [strict_tool(strict)],
+            })),
+        )
+        .await;
+        let status = response.status();
+        let mut body = json_body(response).await;
+        assert_eq!(status, StatusCode::OK, "strict={strict}: {body}");
+        assert_eq!(body["model"], "acme/grammar-coder", "strict={strict}");
+        settle_created_at(&mut body);
+        let dispatched = gateway.dispatcher.dispatched();
+        assert_eq!(
+            dispatched.last().unwrap().model,
+            dispatched_model,
+            "strict={strict}"
+        );
+    }
+}
+
 #[tokio::test]
 async fn a_translation_refusal_publishes_nothing() {
     let gateway = chat_gateway(&[HYBRID_GENERATE_MODEL], &["acme/chat"]).await;

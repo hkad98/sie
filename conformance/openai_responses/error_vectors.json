@@ -253,6 +253,29 @@
       }
     },
     {
+      "name": "strict tool refusal names the Responses tool's strict",
+      "status": 400,
+      "body": {
+        "error": {
+          "message": "strict function tools are not enforced on this route for this model",
+          "type": "invalid_request_error",
+          "param": "tools[0].function.strict",
+          "code": "unsupported_field"
+        }
+      },
+      "expect": {
+        "status": 400,
+        "body": {
+          "error": {
+            "message": "strict function tools are not enforced on this route for this model",
+            "type": "invalid_request_error",
+            "param": "tools[0].strict",
+            "code": "unsupported_field"
+          }
+        }
+      }
+    },
+    {
       "name": "tool parameter schema path names the Responses tool",
       "status": 400,
       "body": {
